@@ -10,9 +10,12 @@ services:
 before_install:
 - docker image build -t ${IMGNAME} .
 
+before_script:
+- python3 --version
+- pip install -r requirements.txt
 script:
 #  - dig +short myip.opendns.com @resolver1.opendns.com
-- pytest
+- python3 -m pytest
 
 after_success:
 - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASS}
