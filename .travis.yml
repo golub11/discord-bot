@@ -2,7 +2,7 @@ arch:
   - arm64
 
 env:
-  - IMGNAME=bradmorg/ubuntu:dbot
+  - IMGNAME=golub/ubuntu:dbot
 
 services:
   - docker
@@ -11,14 +11,9 @@ before_install:
 - docker image build -t ${IMGNAME} .
 
 script:
-#TravisCI seems to be coming in on undocumented IP addresses.
- - dig +short myip.opendns.com @resolver1.opendns.com
-
+#  - dig +short myip.opendns.com @resolver1.opendns.com
+- python3 -m pytest
 
 after_success:
 - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASS}
 - echo "...Moving code to the production...."
-# - echo "${SSH_KEY}" |  base64 --decode > /tmp/ssh_rsa
-# - chmod 600 /tmp/ssh_rsa
-# - ssh -o "StrictHostKeyChecking no" pi@${IPADDR} -i /tmp/ssh_rsa "echo test > test.log"
-# - ssh -o "StrictHostKeyChecking no" pi@${IPADDR} -i /tmp/ssh_rsa "cd ${INSTALL_LOCATION} && git pull ${TRAVIS_BUILD_WEB_URL} && docker image build -t ${IMGNAME} ${INSTALL_LOCATION}/. && docker push ${IMGNAME} && docker stop discordbot; docker rm discordbot; docker run --name discordbot --restart always -d -e TOKEN=${TOKEN} ${IMGNAME}"
