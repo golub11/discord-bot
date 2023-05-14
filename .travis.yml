@@ -12,7 +12,7 @@ before_install:
 
 script:
 #  - dig +short myip.opendns.com @resolver1.opendns.com
-- python3 -m pytest
+- pytest
 
 after_success:
 - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASS}
