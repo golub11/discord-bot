@@ -16,7 +16,6 @@ before_install:
 
 before_script:
 - python3 --version
-- pip install -r requirements.txt
 script:
 #  - dig +short myip.opendns.com @resolver1.opendns.com
 - python3 -m pytest
