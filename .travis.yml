@@ -13,9 +13,8 @@ before_install:
 before_script:
 - python3 --version
 script:
-#  - dig +short myip.opendns.com @resolver1.opendns.com
 - pip3 install pytest
 - python3 -m pytest
 after_success:
 - docker login -u ${DHUB_USERNAME} -p ${DHUB_PASS}
-- echo "...Moving code to the production...."
+- python3 moveToProduction.py 
