@@ -6,7 +6,6 @@ RUN apt-get install python3-pip -y
 RUN pip3 install pytest
 
 ENV HOME /home
-COPY dbot.py /home/dbot.py
 STOPSIGNAL SIGTERM
 WORKDIR /home
 
